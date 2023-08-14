@@ -13,7 +13,15 @@ const millisecond=document.getElementsByClassName("texttime")[3];
 let clearbtn=document.getElementById("Clear");
 let stopwatchbtn=document.getElementById("Startwatch");
 let savebtn=document.getElementById("Save");
-let leftcol=document.getElementsByClassName("leftcol")[0];
+let leftcol;
+
+let matchresult=window.matchMedia("(max-width:1024px)").matches;
+
+if (matchresult==true) {
+    leftcol=document.getElementsByClassName("leftcol")[1];
+} else {
+    leftcol=document.getElementsByClassName("leftcol")[0];
+}
 
 let stopwatch=()=>{
     if (hours==null && minutes==null && seconds==null) {
@@ -121,17 +129,18 @@ let clear=(()=>{
 let panel1,scb,ssb=[],deltimebtn;
 
 let save=(()=>{
+    leftcol.style.display="block";
+    leftcol.style.visibility="visible";
     panel1=document.createElement("div");
     scb=document.createElement("div");
     deltimebtn=document.createElement("button");
-
+    
     panel1.classList.add("panel1");
     scb.classList.add("savetimecirclebox")
     deltimebtn.classList.add("delbin");
 
     scb.innerHTML=`${timeiterate}`;
     deltimebtn.innerHTML="Del";
-
     leftcol.appendChild(panel1);
     panel1.appendChild(scb);
     for (let index = 0; index < 4; index++) {
