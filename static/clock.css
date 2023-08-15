@@ -9,7 +9,9 @@
 body{
     width: 100vw;
     height: 100vh;
-    background-color: #48474F;
+    /* background-color: #48474F; */
+    background-size: cover;
+    background-repeat: no-repeat
 }
 
 a{
@@ -19,11 +21,30 @@ a{
 
 h2{
     font-size: 1.4rem;
-    color: whitesmoke;
 }
 
 .downcol .leftcol{
     display: none;
+}
+
+.numbers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -7px;
+    right: 170px;
+}
+
+.number{
+    width: 354px;
+    height: 370px;
+    transform: rotate(calc(30deg*var(--n)));
+    position: absolute;
+    text-align: center;
+    inset: 5px;
+    font-size: 27px;
+    margin: auto;
 }
 
 .panel .leftcol{
@@ -47,7 +68,7 @@ h2{
     height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 6vh;
+    gap: 4vh;
     justify-content: center;
     align-items: center;
 }
@@ -78,7 +99,7 @@ button{
 }
 
 .clock{
-    background-color: #D9D9D9;
+    background: url("https://img.freepik.com/free-vector/white-abstract-background_23-2148817571.jpg");
     border: 4px solid #91C988;
     width: 400px;
     height: 400px;
@@ -216,10 +237,10 @@ button{
 }
 
 .delbin{
+    cursor: pointer;
     width: 43px;
     height:43px;
-    border: 0px solid black;
-    background-color:#91C988 ;
+    background: url("https://cdn-icons-png.flaticon.com/512/3405/3405244.png");
 }
 
 .stick1{
@@ -258,6 +279,19 @@ button{
     bottom: 7px;
 }
 
+.downcolsleftcol{
+    display: none;
+    visibility: hidden;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 10px;
+    align-self: self-start;
+    background-color: transparent;
+    width: max-content;
+    height: 100px;
+    overflow-y: auto;
+}
 
 @media screen and (max-width:768px) {
     .clock{
@@ -347,5 +381,18 @@ button{
         width: max-content;
         height: 100px;
         overflow-y: auto;
+    }
+}
+
+@media screen and (max-width:768px){
+    .number{
+        width: 223px;
+        height: 223px;
+        font-size: 21px;
+    }
+
+    .numbers{
+        position: relative;
+        right: 110px;
     }
 }

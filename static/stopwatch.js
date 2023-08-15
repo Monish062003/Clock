@@ -80,14 +80,6 @@ let stopwatch=()=>{
 let x=((key)=>{
     let link="/";
     switch (key) {
-        case 0:
-            link="/changetime"  
-            break;
-
-        case 1:
-            link="/worldclock"
-            break;
-
         case 2:
             link="/stopwatch"
             break;
@@ -123,24 +115,30 @@ let clear=(()=>{
         minute.innerHTML="0";
         second.innerHTML="0";
         millisecond.innerHTML="0";
+        hourarrow.style.transform=`rotate(${seconds*6}deg)`;
+        secondarrow.style.transform=`rotate(${seconds*6}deg)`;
+        minutearrow.style.transform=`rotate(${minutes*6}deg)`;
+        onalldelete();
     }
 });
 
 let panel1,scb,ssb=[],deltimebtn;
 
 let save=(()=>{
+    if (timeiterate==0) {
+        startlistener();
+    }
     leftcol.style.display="block";
     leftcol.style.visibility="visible";
     panel1=document.createElement("div");
     scb=document.createElement("div");
-    deltimebtn=document.createElement("button");
-    
+    deltimebtn=document.createElement("img");
+    deltimebtn.src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png";
     panel1.classList.add("panel1");
     scb.classList.add("savetimecirclebox")
     deltimebtn.classList.add("delbin");
 
     scb.innerHTML=`${timeiterate}`;
-    deltimebtn.innerHTML="Del";
     leftcol.appendChild(panel1);
     panel1.appendChild(scb);
     for (let index = 0; index < 4; index++) {
@@ -158,12 +156,32 @@ let save=(()=>{
     timeiterate+=1;
 });
 
-
-leftcol.addEventListener('click',function (e) {
-    if (e.target.tagName=="BUTTON") {
-        e.target.parentElement.remove();
+function onalldelete(){
+    leftcol.remove();
+    leftcol=document.createElement("div");
+    leftcol.innerHTML="<h2>Stopwatch</h2>"
+    if (matchresult==true) {
+        leftcol.classList.add("downcolsleftcol");
+        document.getElementsByClassName("downcol")[0].prepend(leftcol);
+    } else {
+        leftcol.classList.add("leftcol");
+        document.getElementsByClassName("panel")[0].prepend(leftcol);
     }
-})
+    timeiterate=0;
+}
+
+function startlistener(){
+    leftcol.addEventListener('click',function (e) {
+        if (e.target.tagName=="IMG") {
+            e.target.parentElement.remove();
+        }
+        if (leftcol.childNodes.length==1) {
+            onalldelete();
+        }
+    })
+}
+
+startlistener();
 
 stopwatchbtn.addEventListener('click',start_stop);
 clearbtn.addEventListener('click',clear);
